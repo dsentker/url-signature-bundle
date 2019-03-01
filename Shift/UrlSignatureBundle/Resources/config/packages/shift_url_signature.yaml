@@ -1,32 +1,51 @@
 parameters:
     shift_url_signature.hash_algo: 'SHA256'
     shift_url_signature.secret:    '%env(APP_SECRET)%' # provided by symfony/framework-bundle
+    shift_url_signature.query_signature_name: '_signature'
+    shift_url_signature.query_expires_name: '_signature'
 
 services:
+
+    # Request validator meant for controller injection
     Shift\UrlSignatureBundle\Utils\RequestValidator:
         arguments: ['@request_stack', '@shift_url_signature.validator']
 
+    # Builder meant for controller injection
+    Shift\UrlSignatureBundle\Utils\UrlSignatureBuilder:
+        arguments: ['@shift_url_signature.builder', '@router.default']
+
+    # Event Listener for annotation usage
     shift_url_signature.check_request:
         class: Shift\UrlSignatureBundle\EventListener\ControllerCheckRequestListener
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
         arguments: ['@annotation_reader', '@shift_url_signature.validator']
 
+    # The default full configuration
     shift_url_signature.configuration.default:
-        class: UrlSignature\HashConfiguration
+        class:  UrlSignature\HashConfiguration
         shared: true
         arguments: ['%shift_url_signature.secret%']
         calls:
             -   method: setAlgorithm
                 arguments:
                     - '%shift_url_signature.hash_algo%'
+            -   method: setHashMask
+                arguments:
+                    - !php/const UrlSignature\HashConfiguration::FLAG_HASH_SCHEME
+                    - !php/const UrlSignature\HashConfiguration::FLAG_HASH_HOST
+                    - !php/const UrlSignature\HashConfiguration::FLAG_HASH_PORT
+                    - !php/const UrlSignature\HashConfiguration::FLAG_HASH_PATH
+                    - !php/const UrlSignature\HashConfiguration::FLAG_HASH_QUERY
 
+    # Singleton instance from builder
     shift_url_signature.builder:
         class:  UrlSignature\Builder
         shared: true
         arguments: ['@shift_url_signature.configuration.default']
         public: true
 
+    # Singleton instance from validator
     UrlSignature\Validator:
         arguments: ['@shift_url_signature.configuration.default']
         shared: true
@@ -36,6 +55,7 @@ services:
         alias:  UrlSignature\Validator
         public: true
 
+    # Twig extension
     Shift\UrlSignatureBundle\Twig\SignedPathExtension:
         arguments: ['@router.default', '@shift_url_signature.builder']
         tags: ['twig.extension']
