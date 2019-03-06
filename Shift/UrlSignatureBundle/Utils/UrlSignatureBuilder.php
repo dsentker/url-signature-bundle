@@ -2,7 +2,6 @@
 
 namespace Shift\UrlSignatureBundle\Utils;
 
-
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use UrlSignature\Builder;

@@ -32,7 +32,7 @@ class RequestValidator
     public function isValid()
     {
         $request = $this->getRequest();
-        if(empty($request)) {
+        if (empty($request)) {
             throw new \RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
         }
         return $this->validator->isValid($request->getUri());
@@ -48,7 +48,7 @@ class RequestValidator
     public function verify()
     {
         $request = $this->getRequest();
-        if(empty($request)) {
+        if (empty($request)) {
             throw new \RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
         }
         return $this->validator->verify($request->getUri());
@@ -57,7 +57,7 @@ class RequestValidator
     /**
      * @return \Symfony\Component\HttpFoundation\Request|null
      */
-    public function getRequest() : ?Request
+    public function getRequest(): ?Request
     {
         return $this->requestStack->getCurrentRequest();
     }
@@ -69,4 +69,4 @@ class RequestValidator
     {
         return $this->validator;
     }
- }
+}

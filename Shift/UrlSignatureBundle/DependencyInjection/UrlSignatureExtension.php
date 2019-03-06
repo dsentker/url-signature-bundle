@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Daniel
- * Date: 27.02.2019
- * Time: 16:53
- */
 
 namespace Shift\UrlSignatureBundle\DependencyInjection;
 
@@ -19,11 +13,10 @@ class UrlSignatureExtension extends Extension
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__.'/../Resources/config/packages')
+            new FileLocator(__DIR__ . '/../Resources/config/packages')
         );
         //$loader->load('services.yaml');
         $loader->load('shift_url_signature.yaml');
     }
-
 
 }

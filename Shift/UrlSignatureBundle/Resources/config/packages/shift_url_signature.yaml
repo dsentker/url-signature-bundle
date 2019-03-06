@@ -1,8 +1,8 @@
 parameters:
-    shift_url_signature.hash_algo: 'SHA256'
-    shift_url_signature.secret:    '%env(APP_SECRET)%' # provided by symfony/framework-bundle
-    shift_url_signature.query_signature_name: '_sig'
-    shift_url_signature.query_expires_name: '_tim'
+    shift_url_signature.hash_algo:            'SHA256'
+    shift_url_signature.secret:               '%env(APP_SECRET)%' # provided by symfony/framework-bundle
+    shift_url_signature.query_signature_name: '_signature'
+    shift_url_signature.query_expires_name:   '_expires'
 
 services:
 

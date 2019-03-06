@@ -1,4 +1,5 @@
 <?php
+
 namespace Shift\UrlSignatureBundle\EventListener;
 
 use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
@@ -58,9 +59,9 @@ class ControllerCheckRequestListener
             throw new AccessDeniedHttpException('The signature you provided is invalid.');
         } catch (SignatureNotFoundException $e) {
             throw new AccessDeniedHttpException('This URL requires a signature, but was not found.');
-        } catch(ValidatorException $e) {
+        } catch (ValidatorException $e) {
             throw new AccessDeniedHttpException($e->getMessage());
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
 
