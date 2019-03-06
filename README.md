@@ -205,7 +205,7 @@ return [
 ```
 
 ## Credits
-Based on the ideas by [psecio](https://github.com/psecio), the project was forked by [dsentker](https://github.com/dsentker) (thats me 😁) to upgrade the code for PHP 7.x applications. The adjustments then resulted in a separate library (this one). The implementation of a Symfony Bundle is planned.
+Based on the ideas by [psecio](https://github.com/psecio), the project was forked by [dsentker](https://github.com/dsentker) (thats me 😁) to upgrade the code for PHP 7.x applications. The adjustments then resulted in a separate library and, additionally, in this symfony 4 bundle.
 
 ## Submitting bugs and feature requests
 Bugs and feature request are tracked on GitHub.
