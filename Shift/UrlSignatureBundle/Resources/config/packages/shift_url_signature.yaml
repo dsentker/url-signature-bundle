@@ -1,8 +1,8 @@
 parameters:
     shift_url_signature.hash_algo: 'SHA256'
     shift_url_signature.secret:    '%env(APP_SECRET)%' # provided by symfony/framework-bundle
-    shift_url_signature.query_signature_name: '_signature'
-    shift_url_signature.query_expires_name: '_signature'
+    shift_url_signature.query_signature_name: '_sig'
+    shift_url_signature.query_expires_name: '_tim'
 
 services:
 
@@ -37,6 +37,10 @@ services:
                     - !php/const UrlSignature\HashConfiguration::FLAG_HASH_PORT
                     - !php/const UrlSignature\HashConfiguration::FLAG_HASH_PATH
                     - !php/const UrlSignature\HashConfiguration::FLAG_HASH_QUERY
+            -   method: setSignatureUrlKey
+                arguments: ['%shift_url_signature.query_signature_name%']
+            -   method: setTimeoutUrlKey
+                arguments: ['%shift_url_signature.query_expires_name%']
 
     # Singleton instance from builder
     shift_url_signature.builder:
