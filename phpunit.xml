@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit
+        convertErrorsToExceptions="true"
+        convertWarningsToExceptions="true"
+        convertNoticesToExceptions="true"
+        bootstrap="./vendor/autoload.php"
+        colors="true"
+>
+    <testsuites>
+        <testsuite name="UrlSignatureBundle">
+            <directory suffix="Test.php">./Tests</directory>
+        </testsuite>
+    </testsuites>
+    <php>
+        <server name="KERNEL_CLASS" value="Tests\Fixtures\TestKernel"/>
+        <server name="KERNEL_DIR" value="Shift/UrlSignatureBundle/Tests/Fixtures"/>
+        <env name="SHELL_VERBOSITY" value="-1"/>
+        <env name="SYMFONY_DEPRECATIONS_HELPER" value="/disabled/"/>
+        <env name="APP_SECRET" value="i-am-a-secret-string"/>
+    </php>
+    <filter>
+        <whitelist>
+            <directory>./Shift/UrlSignatureBundle/</directory>
+            <exclude>
+                <directory>./vendor</directory>
+            </exclude>
+        </whitelist>
+    </filter>
+</phpunit>

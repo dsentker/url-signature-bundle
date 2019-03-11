@@ -1,0 +1,20 @@
+framework:
+    test: true
+    secret: test
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+
+sensio_framework_extra:
+    router:
+        annotations: true
+
+services:
+    Tests\Fixtures\SignatureTestBundle\Controller\SimpleController:
+        public: true
+
+twig:
+    debug: '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
+    exception_controller: twig.controller.exception:showAction
+    paths:
+        "%kernel.root_dir%/SignatureTestBundle/Resources/views": UrlSignatureTest

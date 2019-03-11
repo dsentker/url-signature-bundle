@@ -1,6 +1,10 @@
 composer.phar
-/vendor/
+/vendor
 .idea
-*.iml
 Thumbs.db
 *.lnk
+/Shift/UrlSignatureBundle/Tests/Fixtures/cache
+/Shift/UrlSignatureBundle/Tests/Fixtures/logs
+composer.lock
+/.phpunit
+/.php_cs.cache

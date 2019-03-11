@@ -56,7 +56,7 @@ class ControllerCheckRequestListener
         } catch (SignatureExpiredException $e) {
             throw new AccessDeniedHttpException('The requested URL has expired.');
         } catch (SignatureInvalidException $e) {
-            throw new AccessDeniedHttpException('The signature you provided is invalid.');
+            throw new AccessDeniedHttpException('The signature you provided is invalid!');
         } catch (SignatureNotFoundException $e) {
             throw new AccessDeniedHttpException('This URL requires a signature, but was not found.');
         } catch (ValidatorException $e) {

@@ -34,7 +34,8 @@ class SignedPathExtension extends RoutingExtension
     public function getUrlWithSignature($name, $parameters = [], $expire = null)
     {
         $url = parent::getUrl($name, $parameters, false);
-        return $this->builder->signUrl($url, $expire);
+        $a = $this->builder->signUrl($url, $expire);
+        return $a;
     }
 
     /**

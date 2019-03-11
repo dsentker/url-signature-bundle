@@ -211,7 +211,14 @@ Based on the ideas by [psecio](https://github.com/psecio), the project was forke
 Bugs and feature request are tracked on GitHub.
 
 ## TODO
-- [ ] Create tests. I look forward to every support. 
+- [ ] Create more tests. I look forward to every support.
 
 ## Testing
-- TBD.
+```shell
+phpunit Shift/UrlSignatureBundle/Tests
+```
+
+Or, if you prefer Windows:
+```shell
+ .\vendor\bin\phpunit.bat Shift/UrlSignatureBundle/Tests/ --configuration phpunit.xml
+ ```
