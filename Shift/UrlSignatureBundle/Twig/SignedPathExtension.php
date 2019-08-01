@@ -31,11 +31,11 @@ class SignedPathExtension extends RoutingExtension
         ];
     }
 
-    public function getUrlWithSignature($name, $parameters = [], $expire = null)
+    public function getUrlWithSignature($name, $parameters = [], $expire = null): string
     {
         $url = parent::getUrl($name, $parameters, false);
-        $a = $this->builder->signUrl($url, $expire);
-        return $a;
+        $url = $this->builder->signUrl($url, $expire);
+        return $url;
     }
 
     /**
