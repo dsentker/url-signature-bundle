@@ -1,5 +1,6 @@
 composer.phar
 /vendor
+/var
 .idea
 Thumbs.db
 *.lnk

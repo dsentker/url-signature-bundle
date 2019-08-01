@@ -54,5 +54,4 @@ class BuilderTest extends WebTestCase
         $client->request('GET', $signatureUrl);
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }
-
 }
