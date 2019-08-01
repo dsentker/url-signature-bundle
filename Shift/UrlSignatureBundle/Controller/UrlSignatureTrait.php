@@ -23,20 +23,13 @@ trait UrlSignatureTrait
         $this->validator = $validator;
     }
 
-    /**
-     * @return UrlSignatureBuilder
-     */
     public function getBuilder(): UrlSignatureBuilder
     {
         return $this->builder;
     }
 
-    /**
-     * @return RequestValidator
-     */
     public function getValidator(): RequestValidator
     {
         return $this->validator;
     }
-
 }

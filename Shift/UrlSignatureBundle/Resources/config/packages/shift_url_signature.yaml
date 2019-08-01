@@ -5,7 +5,6 @@ parameters:
     shift_url_signature.query_expires_name:   '_expires'
 
 services:
-
     # Request validator meant for controller injection
     Shift\UrlSignatureBundle\Utils\RequestValidator:
         arguments: ['@request_stack', '@shift_url_signature.validator']

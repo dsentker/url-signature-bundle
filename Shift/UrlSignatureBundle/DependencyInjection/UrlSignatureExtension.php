@@ -18,5 +18,4 @@ class UrlSignatureExtension extends Extension
         //$loader->load('services.yaml');
         $loader->load('shift_url_signature.yaml');
     }
-
 }

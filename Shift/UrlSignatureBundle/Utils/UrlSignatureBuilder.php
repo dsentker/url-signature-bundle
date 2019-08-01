@@ -2,9 +2,11 @@
 
 namespace Shift\UrlSignatureBundle\Utils;
 
+use DateTimeInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 use UrlSignature\Builder;
+use UrlSignature\Exception\TimeoutException;
 
 class UrlSignatureBuilder
 {
@@ -12,17 +14,9 @@ class UrlSignatureBuilder
     /** @var Builder */
     private $builder;
 
-    /**
-     * @var RouterInterface
-     */
+    /** @var RouterInterface */
     private $router;
 
-    /**
-     * UrlSignatureBuilder constructor.
-     *
-     * @param Builder         $builder
-     * @param RouterInterface $router
-     */
     public function __construct(Builder $builder, RouterInterface $router)
     {
         $this->builder = $builder;
@@ -30,29 +24,28 @@ class UrlSignatureBuilder
     }
 
     /**
-     * @param string                             $url
-     * @param null|int|\DateTimeInterface|string $timeout
+     * @param string $url
+     * @param mixed  $timeout
      *
      * @return string
-     * @throws \UrlSignature\Exception\TimeoutException
+     * @throws TimeoutException
      */
-    public function signUrl(string $url, $timeout = null)
+    public function signUrl(string $url, $timeout = null): string
     {
         return $this->builder->signUrl($url, $timeout);
     }
 
     /**
-     * @param string                             $name
-     * @param array                              $parameters
-     * @param null|int|\DateTimeInterface|string $timeout
+     * @param string                            $name
+     * @param array                             $parameters
+     * @param null|int|DateTimeInterface|string $timeout
      *
      * @return string
-     * @throws \UrlSignature\Exception\TimeoutException
+     * @throws TimeoutException
      */
-    public function signUrlFromPath($name, $parameters = [], $timeout = null)
+    public function signUrlFromPath($name, $parameters = [], $timeout = null): string
     {
         $url = $this->router->generate($name, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
         return $this->signUrl($url, $timeout);
     }
-
 }

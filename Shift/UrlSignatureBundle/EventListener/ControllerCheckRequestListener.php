@@ -21,10 +21,6 @@ class ControllerCheckRequestListener
     /** @var Validator */
     private $validator;
 
-    /**
-     * @param Reader    $reader
-     * @param Validator $validator
-     */
     public function __construct(Reader $reader, Validator $validator)
     {
         $this->reader = $reader;
@@ -64,6 +60,5 @@ class ControllerCheckRequestListener
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
-
     }
 }

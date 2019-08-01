@@ -4,6 +4,9 @@ namespace Shift\UrlSignatureBundle\Utils;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
+use UrlSignature\Exception\SignatureExpiredException;
+use UrlSignature\Exception\SignatureInvalidException;
+use UrlSignature\Exception\SignatureNotFoundException;
 use UrlSignature\Validator;
 
 class RequestValidator
@@ -14,22 +17,13 @@ class RequestValidator
     /** @var Validator */
     private $validator;
 
-    /**
-     * RequestValidator constructor.
-     *
-     * @param RequestStack $requestStack
-     * @param Validator    $validator
-     */
     public function __construct(RequestStack $requestStack, Validator $validator)
     {
         $this->requestStack = $requestStack;
         $this->validator = $validator;
     }
 
-    /**
-     * @return bool
-     */
-    public function isValid()
+    public function isValid(): bool
     {
         $request = $this->getRequest();
         if (empty($request)) {
@@ -41,11 +35,11 @@ class RequestValidator
     /**
      * @return bool
      *
-     * @throws \UrlSignature\Exception\SignatureExpiredException
-     * @throws \UrlSignature\Exception\SignatureInvalidException
-     * @throws \UrlSignature\Exception\SignatureNotFoundException
+     * @throws SignatureExpiredException
+     * @throws SignatureInvalidException
+     * @throws SignatureNotFoundException
      */
-    public function verify()
+    public function verify(): bool
     {
         $request = $this->getRequest();
         if (empty($request)) {
@@ -54,17 +48,11 @@ class RequestValidator
         return $this->validator->verify($request->getUri());
     }
 
-    /**
-     * @return \Symfony\Component\HttpFoundation\Request|null
-     */
     public function getRequest(): ?Request
     {
         return $this->requestStack->getCurrentRequest();
     }
 
-    /**
-     * @return Validator
-     */
     public function getValidator(): Validator
     {
         return $this->validator;

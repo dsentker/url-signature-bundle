@@ -11,5 +11,4 @@ class ShiftUrlSignatureBundle extends Bundle
     {
         return new UrlSignatureExtension();
     }
-
 }

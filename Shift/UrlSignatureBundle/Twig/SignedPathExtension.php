@@ -6,6 +6,7 @@ use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\TwigFunction;
 use UrlSignature\Builder;
+use UrlSignature\Exception\TimeoutException;
 
 class SignedPathExtension extends RoutingExtension
 {
@@ -18,7 +19,6 @@ class SignedPathExtension extends RoutingExtension
         $this->builder = $builder;
         parent::__construct($generator);
     }
-
 
     public function getFunctions(): array
     {
@@ -47,12 +47,11 @@ class SignedPathExtension extends RoutingExtension
      * @param bool   $relative
      *
      * @return string
-     * @throws \UrlSignature\Exception\TimeoutException
+     * @throws TimeoutException
      */
     public function getPathWithSignature($name, $parameters = [], $relative = false)
     {
         $url = parent::getPath($name, $parameters, $relative);
         return $this->builder->signUrl($url);
     }
-
 }
