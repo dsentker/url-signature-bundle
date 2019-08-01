@@ -7,7 +7,6 @@ use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Validator\Exception\ValidatorException;
 use UrlSignature\Exception\SignatureExpiredException;
 use UrlSignature\Exception\SignatureInvalidException;
 use UrlSignature\Exception\SignatureNotFoundException;
@@ -55,8 +54,6 @@ class ControllerCheckRequestListener
             throw new AccessDeniedHttpException('The signature you provided is invalid!');
         } catch (SignatureNotFoundException $e) {
             throw new AccessDeniedHttpException('This URL requires a signature, but was not found.');
-        } catch (ValidatorException $e) {
-            throw new AccessDeniedHttpException($e->getMessage());
         } catch (\Exception $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
