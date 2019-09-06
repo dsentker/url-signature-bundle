@@ -3,6 +3,8 @@
 ## 1.0.1
 **2019-09-06**
 * Code cleanup
+* Added test for combining route parameter with query parameters.
+* Version Bump
 
 ## 1.0.0
 **2019-08-01**
