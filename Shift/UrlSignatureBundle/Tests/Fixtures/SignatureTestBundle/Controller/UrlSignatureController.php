@@ -16,4 +16,15 @@ class UrlSignatureController extends AbstractController
     {
         return $this->render('@UrlSignatureTest/view.html.twig');
     }
+
+    /**
+     * @RequiresSignatureVerification
+     * @Route("/test-annotation-param/{foo}", name="test_annotation_param")
+     */
+    public function testAnnotationWithParamAction($foo)
+    {
+        return $this->render('@UrlSignatureTest/view.html.twig', [
+            'baz' => $foo
+        ]);
+    }
 }

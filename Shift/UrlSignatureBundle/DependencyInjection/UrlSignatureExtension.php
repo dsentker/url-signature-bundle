@@ -15,7 +15,6 @@ class UrlSignatureExtension extends Extension
             $container,
             new FileLocator(__DIR__ . '/../Resources/config/packages')
         );
-        //$loader->load('services.yaml');
         $loader->load('shift_url_signature.yaml');
     }
 }

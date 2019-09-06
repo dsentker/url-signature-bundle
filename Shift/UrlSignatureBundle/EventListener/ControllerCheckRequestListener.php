@@ -35,8 +35,6 @@ class ControllerCheckRequestListener
             return;
         }
 
-        $request = $event->getRequest();
-
         list($controller, $methodName) = $controllerData;
 
         $reflectionMethod = (new \ReflectionObject($controller))->getMethod($methodName);
@@ -47,7 +45,7 @@ class ControllerCheckRequestListener
         }
 
         try {
-            $this->validator->verify($request->getUri());
+            $this->validator->verify($event->getRequest()->getUri());
         } catch (SignatureExpiredException $e) {
             throw new AccessDeniedHttpException('The requested URL has expired.');
         } catch (SignatureInvalidException $e) {

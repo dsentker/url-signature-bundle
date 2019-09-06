@@ -1,0 +1,7 @@
+{% extends '@SignatureTest/view.html.twig' %}
+
+{% block body %}
+    <p>
+        <a id="link" href="{{ signed_url('test_annotation_param', { remove: true, foo: 42 }, '+14 minutes') }}">Click me</a>
+    </p>
+{% endblock %}

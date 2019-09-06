@@ -2,8 +2,6 @@
 
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use Symfony\Component\DomCrawler\Crawler;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TwigPathTest extends WebTestCase
@@ -16,7 +14,6 @@ class TwigPathTest extends WebTestCase
     {
         parent::setUp();
         $this->client = self::createClient();
-
     }
 
     public function testLinkContainsSignature()
@@ -60,12 +57,15 @@ class TwigPathTest extends WebTestCase
 
         $link = $crawler->filter('a#link')->eq(0)->attr('href');
         $crawler = $this->client->request('GET', $link);
-        #echo $link;
-        #echo $crawler->html();
         $this->assertEquals('Hello, World!', $crawler->filter('p#welcomeMessage')->eq(0)->text());
     }
 
+    public function testLinkContainsExpirationWithQueryIsVerified() {
+        $url = $this->client->getKernel()->getContainer()->get('router')->generate('test_link_timeout_query', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $crawler = $this->client->request('GET', $url);
 
-
-
+        $link = $crawler->filter('a#link')->eq(0)->attr('href');
+        $crawler = $this->client->request('GET', $link);
+        $this->assertEquals('Hello, World!', $crawler->filter('p#welcomeMessage')->eq(0)->text());
+    }
 }

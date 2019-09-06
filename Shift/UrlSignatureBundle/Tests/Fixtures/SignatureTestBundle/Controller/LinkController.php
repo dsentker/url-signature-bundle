@@ -13,9 +13,7 @@ class LinkController extends AbstractController
      */
     public function showSignatureLinkAction()
     {
-        return $this->render('@UrlSignatureTest/signature-link.html.twig', [
-
-        ]);
+        return $this->render('@UrlSignatureTest/signature-link.html.twig');
     }
 
     /**
@@ -23,8 +21,14 @@ class LinkController extends AbstractController
      */
     public function showSignatureLinkWithTimeoutAction()
     {
-        return $this->render('@UrlSignatureTest/signature-expiring-link.html.twig', [
+        return $this->render('@UrlSignatureTest/signature-expiring-link.html.twig');
+    }
 
-        ]);
+    /**
+     * @Route("/test-timeout-link", name="test_link_timeout_query")
+     */
+    public function showSignatureLinkWithTimeoutAndQueryAction()
+    {
+        return $this->render('@UrlSignatureTest/signature-expiring-link-with-query.html.twig');
     }
 }

@@ -25,8 +25,8 @@ class SignedPathExtension extends RoutingExtension
         return [
             new TwigFunction('signed_url', [$this, 'getUrlWithSignature']),
 
-            // provides a function similar to symfony path() function although path() functions are not usable for the
-            // hash comparison
+            // provides a function similar to symfony's path() extension although path() function are not usable for
+            // the hash comparison, because it does not generate an absolute URL.
             new TwigFunction('signed_path', [$this, 'getUrlWithSignature']),
         ];
     }

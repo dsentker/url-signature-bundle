@@ -7,5 +7,4 @@ namespace Shift\UrlSignatureBundle\Annotation;
  */
 class RequiresSignatureVerification
 {
-
 }

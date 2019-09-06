@@ -1,5 +1,9 @@
 # CHANGELOG #
 
+## 1.0.1
+**2019-09-06**
+* Code cleanup
+
 ## 1.0.0
 **2019-08-01**
 * Some Code style fixed (PSR)

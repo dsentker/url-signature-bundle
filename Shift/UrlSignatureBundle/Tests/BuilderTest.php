@@ -22,7 +22,11 @@ class BuilderTest extends WebTestCase
         parent::setUp();
         $this->client = self::createClient();
         $this->builder = $this->client->getKernel()->getContainer()->get('shift_url_signature.builder');
-        $this->actionUrl = $this->client->getKernel()->getContainer()->get('router')->generate('test_annotation', [], UrlGeneratorInterface::ABSOLUTE_URL);
+        $this->actionUrl = $this->client->getKernel()->getContainer()->get('router')->generate(
+            'test_annotation',
+            [],
+            UrlGeneratorInterface::ABSOLUTE_URL
+        );
     }
 
 
@@ -34,8 +38,6 @@ class BuilderTest extends WebTestCase
         #$crawler = $client->request('GET', '/test-annotation');
         #$this->assertEquals($checkHtml, $crawler->filterXPath('//body')->html());
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
-
-
     }
 
     public function testThrowExceptionOnInvalidSignature()
