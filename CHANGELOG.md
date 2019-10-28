@@ -1,5 +1,11 @@
 # CHANGELOG #
 
+## 1.0.2
+**2019-10-28**
+* Added Return type declarations
+* Updated README
+* Honor url-signature v1.0.9 / Version bump
+
 ## 1.0.1
 **2019-09-06**
 * Code cleanup

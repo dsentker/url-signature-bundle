@@ -7,7 +7,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class ShiftUrlSignatureBundle extends Bundle
 {
-    public function getContainerExtension()
+    public function getContainerExtension(): UrlSignatureExtension
     {
         return new UrlSignatureExtension();
     }

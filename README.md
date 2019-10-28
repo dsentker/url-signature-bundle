@@ -24,12 +24,18 @@ Symfony operations: 1 recipe
 Executing script cache:clear [OK]
 Executing script assets:install public [OK]
 ```
+If you use Symfony Flex, you do not have to do anything anymore. Otherwise you have to include the bundle in your `<root>/config/bundles.php` like this:
 
-As you can see, Symfony flex is able to install this bundle automatically, so there is nothing more to do for you :-)
-Looking for setup instructions without Symfony Flex? Look at the bottom of this file.
+```php
+<?php
+return [
+    // ...
+    Shift\UrlSignatureBundle\ShiftUrlSignatureBundle::class => ['all' => true],
+];
+```
 
 ## Usage
-### Sign URLs in your template / twig files
+### Sign URLs in your Twig Template
 This bundle comes with a twig function to create an url from any route name: `signed_url()` (and, as alias, `signed_path()`) works just like the symfony / twig function `path()` which you have certainly used a hundredfold. signed_path expects a route name and, optionally, query data as array:
 ```twig
 <!-- Generating a regular link -->
@@ -56,7 +62,6 @@ use Shift\UrlSignatureBundle\Utils\UrlSignatureBuilder;
 
 class ExampleController extends AbstractController
 {
-
     /**
      * @Route("/member/detail/{id}", name="member_detail")
      */
@@ -75,29 +80,7 @@ class ExampleController extends AbstractController
 ### Verify URLs
 This bundle offers several ways to check the signature of the URL in your controller.
 
-#### Verify a signature with an Annotation
-Annotate your controller action like the following example:
-
-```php
-use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
-
-class ExampleController extends AbstractController
-{
-
-    /**
-     * @RequiresSignatureVerification()
-     *
-     * @Route("/member/detail/{id}", name="member_detail")
-     */
-    public function index(User $user) {
-        // ...
-    }
-}
-```
-
-If the annotation is present, an Event Listener checks the incoming request URL. If the signature is missing (or invalid), an `\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException` is thrown **before** your action is called. Make sure to give the user an useful response if an AccessDeniedException is thrown (This applies regardless of the use of this bundle, of course).
-
-#### Verify a signature with dependency injection
+#### Verify a signature with dependency injection (recommended)
 Inject an `Shift\UrlSignatureBundle\Utils\RequestValidator` instance to your action:
 
 ```php
@@ -105,7 +88,6 @@ use Shift\UrlSignatureBundle\Utils\RequestValidator;
 
 class ExampleController extends AbstractController
 {
-
     /**
      * @Route("/member/detail/{id}", name="member_detail")
      */
@@ -125,6 +107,27 @@ class ExampleController extends AbstractController
 
     }
 ``` 
+
+#### Verify a signature with an Annotation
+Annotate your controller action like the following example:
+
+```php
+use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
+
+class ExampleController extends AbstractController
+{
+    /**
+     * @RequiresSignatureVerification()
+     *
+     * @Route("/member/detail/{id}", name="member_detail")
+     */
+    public function index(User $user) {
+        // ...
+    }
+}
+```
+
+If the annotation is present, an Event Listener checks the incoming request URL. If the signature is missing (or invalid), an `\Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException` is thrown **before** your action is called. Make sure to give the user an useful response if an AccessDeniedException is thrown (This applies regardless of the use of this bundle, of course).
 
 ### Build hashed URLs and verify signatures with a trait
 This bundle comes with a trait to make the access to the Builder and RequestValidator easier::
@@ -152,7 +155,7 @@ class SingleActionController extends AbstractController
 }
 ```
 
-_**Note:** The trait has a constructor. If your controller already has a constructor, you should not use this trait. Read more [at SO about "constructor in traits"](https://stackoverflow.com/questions/12478124/how-to-overload-class-constructor-within-traits-in-php-5-4)._
+_**Note:** The trait has its own constructor. If your controller already has a constructor, you should not use this trait. Read more [at StackOverflow about "constructor in traits"](https://stackoverflow.com/questions/12478124/how-to-overload-class-constructor-within-traits-in-php-5-4)._
 
 ## Advanced Usage
 
@@ -192,17 +195,6 @@ shift_url_signature.configuration.default:
                 arguments: ['%shift_url_signature.query_expires_name%']
 ``` 
 Do not be surprised at the weird looking arguments for the `setHashMask` method - I did not find a better solution to set a bitmask in a services.yaml.
-
-### Manual Installation
-Download this repository, wire it with your autoloading mechanism and include the bundle in your `<root>/config/bundles.php` like this:
-
-```php
-<?php
-return [
-    // ...
-    Shift\UrlSignatureBundle\ShiftUrlSignatureBundle::class => ['all' => true],
-];
-```
 
 ## Credits
 Based on the ideas by [psecio](https://github.com/psecio), the project was forked by [dsentker](https://github.com/dsentker) (thats me 😁) to upgrade the code for PHP 7.x applications. The adjustments then resulted in a separate library and, additionally, in this symfony 4 bundle.

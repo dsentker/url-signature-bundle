@@ -34,8 +34,8 @@
     "symfony/css-selector": "^4.2"
   },
   "require": {
-    "php": "^7.1",
-    "dsentker/url-signature": "^1.0.8",
+    "php": "^7.2",
+    "dsentker/url-signature": "^1.0.9",
     "symfony/http-kernel": "~4.0",
     "symfony/http-foundation": "~4.0",
     "symfony/twig-bridge": "~4.0",
