@@ -4,8 +4,8 @@ namespace Shift\UrlSignatureBundle\EventListener;
 
 use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
 use Doctrine\Common\Annotations\Reader;
+use Symfony\Component\HttpKernel\Event\ControllerEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
-use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use UrlSignature\Exception\SignatureExpiredException;
 use UrlSignature\Exception\SignatureInvalidException;
@@ -29,7 +29,7 @@ class ControllerCheckRequestListener
     /**
      * {@inheritdoc}
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onKernelController(ControllerEvent $event)
     {
         if (!is_array($controllerData = $event->getController())) {
             return;

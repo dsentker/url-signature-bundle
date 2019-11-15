@@ -24,7 +24,7 @@ class TestKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__.'/config/config.yml');
+        $loader->load(__DIR__ . '/config/config.yml');
         $loader->load(function (ContainerBuilder $container) {
             // Register a NullLogger to avoid getting the stderr default logger of FrameworkBundle
             $container->register('logger', 'Psr\Log\NullLogger');
@@ -36,7 +36,7 @@ class TestKernel extends Kernel
     {
         // Symfony, Y U deprecating $this->rootDir ??
         // https://github.com/symfony/symfony/issues/29110
-        return $this->getProjectDir() .'/Shift/UrlSignatureBundle/Tests/Fixtures/cache/'.$this->environment;
+        return $this->getProjectDir() . '/Shift/UrlSignatureBundle/Tests/Fixtures/cache/' . $this->environment;
     }
 
     public function getLogDir()
