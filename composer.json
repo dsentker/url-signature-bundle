@@ -22,7 +22,7 @@
     "phpunit/phpunit": "^7.0",
     "symfony/expression-language": "^3.3|^4.0",
     "symfony/finder": "^3.3|^4.0",
-    "symfony/framework-bundle": "^3.3|^4.0",
+    "symfony/framework-bundle": "^4.1.2",
     "sensio/framework-extra-bundle": "^5.2",
     "symfony/security-bundle": "^3.3|^4.0",
     "symfony/yaml": "^3.3|^4.0",
