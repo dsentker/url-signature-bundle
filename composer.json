@@ -15,7 +15,8 @@
   "authors": [
     {
       "name": "Daniel Sentker",
-      "email": "tracid2008@gmail.com"
+      "email": "tracid2008@gmail.com",
+      "role": "lead"
     }
   ],
   "require-dev": {
