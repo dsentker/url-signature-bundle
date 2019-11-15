@@ -1,28 +1,18 @@
 # URL Signature Bundle
-**A Symfony4 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
+**A Symfony 4 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
 
-This bundle allows you to build urls with a signature un query string to prevent the modification of URL parts form a user. For a more detailed description, view the README from [url-signature](https://github.com/dsentker/url-signature) library .
+This bundle allows you to build URLs with a signature in query string to prevent the modification of URL parts form a user. For a more detailed description, view the README from [url-signature](https://github.com/dsentker/url-signature) library .
 
-Features:
-* URL generation in .twig-Files
+**Features:**
+* URL generation in Twig Templates
 * URL generation and URL validation with a controller helper trait
-* URL generation and URL validation with action-based Dependency Injection in your controllers
-* URL validation with Annotation support 
+* URL generation and URL validation with Dependency Injection in your controllers
+* URL validation in your controller with Annotation 
 
 ## Installation
-The best way to install this bundle is via composer in your Symfony 4 Framework:
+Use composer to install this bundle:
 ```composer
 require dsentker/url-signature-bundle
-```
-...which results in:
-```composer log
-Package operations: 1 install, 0 updates, 0 removals
-  - Installing dsentker/url-signature-bundle (0.0.1): Downloading (100%)
-[...]
-Symfony operations: 1 recipe
-  - Configuring dsentker/url-signature-bundle (>=0.0.1): From auto-generated recipe
-Executing script cache:clear [OK]
-Executing script assets:install public [OK]
 ```
 If you use Symfony Flex, you do not have to do anything anymore. Otherwise you have to include the bundle in your `<root>/config/bundles.php` like this:
 
@@ -35,15 +25,16 @@ return [
 ```
 
 ## Usage
-### Sign URLs in your Twig Template
-This bundle comes with a twig function to create an url from any route name: `signed_url()` (and, as alias, `signed_path()`) works just like the symfony / twig function `path()` which you have certainly used a hundredfold. signed_path expects a route name and, optionally, query data as array:
+### Create signed URLs in your Twig Template
+This bundle comes with a twig extension to create an url from any route name: `signed_url()` (and, as alias, `signed_path()`) works just like the symfony / twig function `path()` which you have certainly used a hundredfold. `signed_path` expects a route name as first argument and, optionally, query data as array:
 ```twig
-<!-- Generating a regular link -->
+<!-- Generating a link -->
 <a href="{{ path('member_detail', { id: user.id }) }}">A Link </a>
 
 <!-- A link with a hash signature -->
 <a href="{{ signed_url('member_detail', { id: user.id }) }}">A Link with a signature</a>
 ```
+Both links lead to the same target, but the link created via `signed_url(...)` has a hash in the query string. This hash can be validated in the destination controller. 
 
 To set an expire date for an URL, pass the date as the 3rd parameter:
  ```html
@@ -53,6 +44,8 @@ The expiration value can be
 * a relative string (parsable with [date()](http://php.net/manual/de/function.date.php) function )
 * a \DateTime object
 * a timestamp as integer
+
+If the hash value is validated AFTER the expiration time, it is invalid.
 
 ### Sign URLs in your controller
 Use dependency injection to get an instance of `Shift\UrlSignatureBundle\Utils\UrlSignatureBuilder`:
@@ -97,9 +90,9 @@ class ExampleController extends AbstractController
             // is Signature missing or invalid? Show an alert, redirect or do something you like    
         }
 
-        // Will throw an Exception if the signature is missing or invalid
+        // Alternatively, you can use this method. It throws an exception if the hash value
+        // is missing or not valid.
         $signatureValidator->verify();
-
 
         // There is no need to also inject the request object to your 
         // action method as it is provided by RequestValidator instance.
@@ -196,9 +189,6 @@ shift_url_signature.configuration.default:
 ``` 
 Do not be surprised at the weird looking arguments for the `setHashMask` method - I did not find a better solution to set a bitmask in a services.yaml.
 
-## Credits
-Based on the ideas by [psecio](https://github.com/psecio), the project was forked by [dsentker](https://github.com/dsentker) (thats me 😁) to upgrade the code for PHP 7.x applications. The adjustments then resulted in a separate library and, additionally, in this symfony 4 bundle.
-
 ## Submitting bugs and feature requests
 Bugs and feature request are tracked on GitHub.
 
@@ -210,7 +200,7 @@ Bugs and feature request are tracked on GitHub.
 phpunit Shift/UrlSignatureBundle/Tests
 ```
 
-Or, if you prefer Windows:
+Or, if you use Windows:
 ```shell
  .\vendor\bin\phpunit.bat Shift/UrlSignatureBundle/Tests/ --configuration phpunit.xml
  ```
