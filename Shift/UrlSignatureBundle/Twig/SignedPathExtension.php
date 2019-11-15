@@ -37,21 +37,4 @@ class SignedPathExtension extends RoutingExtension
         $url = $this->builder->signUrl($url, $expire);
         return $url;
     }
-
-    /**
-     * @deprecated A path without host is not useful for signature hash_equals. Use methods which references
-     *             parent::getUrl() instead.
-     *
-     * @param string $name
-     * @param array  $parameters
-     * @param bool   $relative
-     *
-     * @return string
-     * @throws TimeoutException
-     */
-    public function getPathWithSignature($name, $parameters = [], $relative = false)
-    {
-        $url = parent::getPath($name, $parameters, $relative);
-        return $this->builder->signUrl($url);
-    }
 }
