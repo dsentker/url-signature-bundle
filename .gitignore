@@ -1,7 +1,7 @@
 composer.phar
 /vendor
 /var
-.idea
+.idea/
 Thumbs.db
 *.lnk
 /Shift/UrlSignatureBundle/Tests/Fixtures/cache

@@ -6,7 +6,6 @@ use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\TwigFunction;
 use UrlSignature\Builder;
-use UrlSignature\Exception\TimeoutException;
 
 class SignedPathExtension extends RoutingExtension
 {

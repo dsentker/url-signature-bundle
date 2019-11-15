@@ -4,7 +4,6 @@ namespace Tests\Fixtures\SignatureTestBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
 
 class LinkController extends AbstractController
 {
