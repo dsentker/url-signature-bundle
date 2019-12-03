@@ -7,6 +7,10 @@ This version removes the use of the Symfony\Component\HttpKernel\Event\FilterCon
 - Code style fixes
 - Removed deprecated method in SignedPathExtension
 - Fixing typos and misleading statements in README
+## 1.0.3
+**2019-12-03**
+* Updates for Symfony 5
+* Replacing Client with KernelBrowser
 
 ## 1.0.2
 **2019-10-28**

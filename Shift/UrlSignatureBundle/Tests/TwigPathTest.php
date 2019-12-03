@@ -1,13 +1,13 @@
 <?php
 
-use Symfony\Bundle\FrameworkBundle\Client;
+use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class TwigPathTest extends WebTestCase
 {
 
-    /** @var Client */
+    /** @var KernelBrowser */
     private $client;
 
     protected function setUp()
@@ -20,7 +20,7 @@ class TwigPathTest extends WebTestCase
     {
         $url = $this->client->getKernel()->getContainer()->get('router')->generate('test_link', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $crawler = $this->client->request('GET', $url);
-
+        
         $signatureQueryKey = $this->client->getKernel()->getContainer()->getParameter('shift_url_signature.query_signature_name');
 
         $anchorLink = $crawler->filter('a#link')->eq(0)->attr('href');

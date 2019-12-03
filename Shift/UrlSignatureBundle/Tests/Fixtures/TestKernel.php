@@ -34,7 +34,7 @@ class TestKernel extends Kernel
 
     public function getCacheDir()
     {
-        // Symfony, Y U deprecating $this->rootDir ??
+        // Symfony, Y U deprecate $this->rootDir ??
         // https://github.com/symfony/symfony/issues/29110
         return $this->getProjectDir() . '/Shift/UrlSignatureBundle/Tests/Fixtures/cache/' . $this->environment;
     }

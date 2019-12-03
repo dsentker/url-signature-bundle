@@ -1,5 +1,5 @@
 # URL Signature Bundle
-**A Symfony 4 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
+**A Symfony 4 and Symfony 5 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
 
 This bundle allows you to build URLs with a signature in query string to prevent the modification of URL parts form a user. For a more detailed description, view the README from [url-signature](https://github.com/dsentker/url-signature) library .
 
@@ -194,6 +194,7 @@ Bugs and feature request are tracked on GitHub.
 
 ## TODO
 - [ ] Create more tests. I look forward to every support.
+- [ ] Restructure this bundle for the new directory structure coming with Symfony >= 5.0
 
 ## Testing
 ```shell

@@ -2,6 +2,7 @@
 
 namespace Shift\UrlSignatureBundle\EventListener;
 
+use ReflectionObject;
 use Shift\UrlSignatureBundle\Annotation\RequiresSignatureVerification;
 use Doctrine\Common\Annotations\Reader;
 use Symfony\Component\HttpKernel\Event\ControllerEvent;
@@ -35,9 +36,9 @@ class ControllerCheckRequestListener
             return;
         }
 
-        list($controller, $methodName) = $controllerData;
+        [$controller, $methodName] = $controllerData;
 
-        $reflectionMethod = (new \ReflectionObject($controller))->getMethod($methodName);
+        $reflectionMethod = (new ReflectionObject($controller))->getMethod($methodName);
         $methodAnnotation = $this->reader->getMethodAnnotation($reflectionMethod, RequiresSignatureVerification::class);
 
         if (!$methodAnnotation) {

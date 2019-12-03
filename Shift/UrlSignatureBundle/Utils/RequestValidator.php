@@ -2,6 +2,7 @@
 
 namespace Shift\UrlSignatureBundle\Utils;
 
+use RuntimeException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use UrlSignature\Exception\SignatureExpiredException;
@@ -27,7 +28,7 @@ class RequestValidator
     {
         $request = $this->getRequest();
         if (empty($request)) {
-            throw new \RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
+            throw new RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
         }
         return $this->validator->isValid($request->getUri());
     }
@@ -43,7 +44,7 @@ class RequestValidator
     {
         $request = $this->getRequest();
         if (empty($request)) {
-            throw new \RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
+            throw new RuntimeException(sprintf('Can not validate the URL because the request does not exist.'));
         }
         return $this->validator->verify($request->getUri());
     }

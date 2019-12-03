@@ -2,21 +2,24 @@
 
 namespace Shift\UrlSignatureBundle\Twig;
 
-use Symfony\Bridge\Twig\Extension\RoutingExtension;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use UrlSignature\Builder;
 
-class SignedPathExtension extends RoutingExtension
+final class SignedPathExtension extends AbstractExtension
 {
 
     /** @var Builder */
     private $builder;
 
+    /** @var UrlGeneratorInterface */
+    private $generator;
+
     public function __construct(UrlGeneratorInterface $generator, Builder $builder)
     {
         $this->builder = $builder;
-        parent::__construct($generator);
+        $this->generator = $generator;
     }
 
     public function getFunctions(): array
@@ -32,8 +35,7 @@ class SignedPathExtension extends RoutingExtension
 
     public function getUrlWithSignature($name, $parameters = [], $expire = null): string
     {
-        $url = parent::getUrl($name, $parameters, false);
-        $url = $this->builder->signUrl($url, $expire);
-        return $url;
+        $url = $this->generator->generate($name, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
+        return $this->builder->signUrl($url, $expire);
     }
 }
