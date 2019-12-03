@@ -20,7 +20,6 @@ class TwigPathTest extends WebTestCase
     {
         $url = $this->client->getKernel()->getContainer()->get('router')->generate('test_link', [], UrlGeneratorInterface::ABSOLUTE_URL);
         $crawler = $this->client->request('GET', $url);
-        
         $signatureQueryKey = $this->client->getKernel()->getContainer()->getParameter('shift_url_signature.query_signature_name');
 
         $anchorLink = $crawler->filter('a#link')->eq(0)->attr('href');

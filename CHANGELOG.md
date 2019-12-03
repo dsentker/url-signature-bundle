@@ -1,16 +1,17 @@
 # CHANGELOG #
+## 1.1.0
+**2019-12-03**
+* Updates for Symfony 5
+* Replacing Client with KernelBrowser in tests
+* Let SignedPathExtension not extend from RoutingExtension (marked final in Symfony 5)
+
 ## 1.0.3
 **2019-11-15**
-
 This version removes the use of the Symfony\Component\HttpKernel\Event\FilterControllerEvent class which is deprecated since Symfony 4.3. Also, small fixes are done:
 - Version bump symfony/framework-bundle to ^4.1.2 (CVE-2019-10909)
 - Code style fixes
 - Removed deprecated method in SignedPathExtension
 - Fixing typos and misleading statements in README
-## 1.0.3
-**2019-12-03**
-* Updates for Symfony 5
-* Replacing Client with KernelBrowser
 
 ## 1.0.2
 **2019-10-28**
