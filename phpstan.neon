@@ -1,0 +1,4 @@
+parameters:
+    inferPrivatePropertyTypeFromConstructor: true
+    excludes_analyse:
+        - Shift/UrlSignatureBundle/Tests/*

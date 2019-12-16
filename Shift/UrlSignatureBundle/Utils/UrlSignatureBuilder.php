@@ -43,7 +43,7 @@ class UrlSignatureBuilder
      * @return string
      * @throws TimeoutException
      */
-    public function signUrlFromPath($name, $parameters = [], $timeout = null): string
+    public function signUrlFromPath($name, array $parameters = [], $timeout = null): string
     {
         $url = $this->router->generate($name, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
         return $this->signUrl($url, $timeout);

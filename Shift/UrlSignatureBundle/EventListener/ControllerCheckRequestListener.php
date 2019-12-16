@@ -30,7 +30,7 @@ class ControllerCheckRequestListener
     /**
      * {@inheritdoc}
      */
-    public function onKernelController(ControllerEvent $event)
+    public function onKernelController(ControllerEvent $event): void
     {
         if (!is_array($controllerData = $event->getController())) {
             return;

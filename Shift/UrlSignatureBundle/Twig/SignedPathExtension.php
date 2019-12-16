@@ -6,6 +6,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use UrlSignature\Builder;
+use UrlSignature\Exception\TimeoutException;
 
 final class SignedPathExtension extends AbstractExtension
 {
@@ -33,7 +34,15 @@ final class SignedPathExtension extends AbstractExtension
         ];
     }
 
-    public function getUrlWithSignature($name, $parameters = [], $expire = null): string
+    /**
+     * @param string $name       The route name
+     * @param array  $parameters the parameters for the URL generation
+     * @param mixed  $expire     A DateTime-parsable string, a timestamp or a DateTimeInterface instance.
+     *
+     * @return string
+     * @throws TimeoutException
+     */
+    public function getUrlWithSignature(string $name, array $parameters = [], $expire = null): string
     {
         $url = $this->generator->generate($name, $parameters, UrlGeneratorInterface::ABSOLUTE_URL);
         return $this->builder->signUrl($url, $expire);
