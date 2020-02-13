@@ -45,7 +45,7 @@ The expiration value can be
 * a \DateTime object
 * a timestamp as integer
 
-If the hash value is validated AFTER the expiration time, it is invalid.
+If the hash value is checked AFTER the expiration time, it is invalid.
 
 ### Sign URLs in your controller
 Use dependency injection to get an instance of `Shift\UrlSignatureBundle\Utils\UrlSignatureBuilder`:

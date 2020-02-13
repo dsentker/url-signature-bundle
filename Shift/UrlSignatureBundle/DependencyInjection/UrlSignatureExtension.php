@@ -13,7 +13,7 @@ class UrlSignatureExtension extends Extension
     {
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config/packages')
+            new FileLocator(sprintf("%s/../Resources/config/packages", __DIR__))
         );
         $loader->load('shift_url_signature.yaml');
     }
