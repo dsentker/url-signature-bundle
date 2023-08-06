@@ -1,5 +1,5 @@
 {
-  "name": "dsentker/url-signature-bundle2",
+  "name": "dsentker/url-signature-bundle",
   "type": "symfony-bundle",
   "description": "A symfony 4 bundle for creating url signatures",
   "keywords": [
