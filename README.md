@@ -198,7 +198,7 @@ Bugs and feature request are tracked on GitHub.
 
 ## Testing
 ```shell
-phpunit Shift/UrlSignatureBundle/Tests
+./vendor/bin/phpunit Shift/UrlSignatureBundle/Tests/
 ```
 
 Or, if you use Windows:
