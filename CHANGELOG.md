@@ -1,4 +1,8 @@
 # CHANGELOG #
+## 1.2.0
+**2023-08-06**
+* Updates for Symfony 6
+
 ## 1.1.0
 **2019-12-03**
 * Updates for Symfony 5
