@@ -1,5 +1,5 @@
 # URL Signature Bundle
-**A Symfony 4 and Symfony 5 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
+**A Symfony >=4 bundle for the [url-signature](https://github.com/dsentker/url-signature) library.**
 
 This bundle allows you to build URLs with a signature in query string to prevent the modification of URL parts form a user. For a more detailed description, view the README from [url-signature](https://github.com/dsentker/url-signature) library .
 
@@ -36,7 +36,7 @@ This bundle comes with a twig extension to create an url from any route name: `s
 ```
 Both links lead to the same target, but the link created via `signed_url(...)` has a hash in the query string. This hash can be validated in the destination controller. 
 
-To set an expire date for an URL, pass the date as the 3rd parameter:
+To set an expiry date for a URL, pass the date as the 3rd parameter:
  ```html
 <a href="{{ signed_url('member_detail', { id: user.id }, '+10 minutes') }}">A Link with a signature, expires in 10 minutes</a>
 ```
